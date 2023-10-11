@@ -1,7 +1,7 @@
 const size = { width: 600, height: 250 },
   rotateIn = { fontSize: "1rem", rotation: 45, opacity: 0 },
   thirdSlide = document.querySelector(".s3sq1"),
-  thirdSlideText = "I like to eat cheese".split("");
+  thirdSlideText = "I like to eat cheese!".split("");
 
 let spanArray = [];
 
@@ -15,23 +15,24 @@ for (let i = 0; i < thirdSlideText.length; i++) {
   spanArray.push(span);
 }
 
-const setFunc = (a) => {
-  let int1 = 50,
-    int2 = 75;
-  a.forEach((e, index) => {
-    setTimeout(() => {
-      gsap.to(`.${e.className}`, {
-        opacity: 1,
-        delay: 0,
-        duration: 0.2,
-        ease: "power2.inOut",
-      });
-    }, index * int1);
-    setTimeout(() => {
-      gsap.to(`.${e.className}`, {
+const setFunc = (a, onCompleteCallback) => {
+  let int1 = 50;
+
+  gsap.to(a, {
+    opacity: 1,
+    duration: 0.2,
+    ease: "power2.inOut",
+    stagger: int1 / 1000,
+    onComplete: () => {
+      gsap.to(a, {
         color: "#0DBBDE",
+        duration: 0.2,
+        onComplete: onCompleteCallback,
+        // Call the onCompleteCallback when
+        // this animation is complete
+        stagger: int1 / 1000,
       });
-    }, index * int2);
+    },
   });
 };
 
@@ -65,6 +66,12 @@ timeline
   .to(".s2sq2", { y: size.height * -1 }, "<")
   .to(".sq1, .sq3", { y: size.height }, "<.2")
   .to(".sq2", { y: size.height * -1 }, "<")
-  .add(() => setFunc(spanArray))
-  .to(".slide3", { backgroundColor: "#0dbbde" }, ">2")
-  .to(".s3sq1 span", { color: "#fff" }, "<");
+  .add(() =>
+    setFunc(spanArray, () => {
+      // This function will be called when the
+      // setFunc animation is complete.
+      timeline
+        .to(".slide3", { backgroundColor: "#0dbbde" })
+        .to(".s3sq1 span", { color: "#fff" }, "<");
+    })
+  );
