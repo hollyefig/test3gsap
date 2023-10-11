@@ -1,7 +1,7 @@
 const size = { width: 600, height: 250 },
   rotateIn = { fontSize: "1rem", rotation: 45, opacity: 0 },
   thirdSlide = document.querySelector(".s3sq1"),
-  thirdSlideText = "I love both of my cats".split("");
+  thirdSlideText = "I like to eat cheese".split("");
 
 let spanArray = [];
 
@@ -17,7 +17,7 @@ for (let i = 0; i < thirdSlideText.length; i++) {
 
 const setFunc = (a) => {
   let int1 = 50,
-    int2 = 100;
+    int2 = 75;
   a.forEach((e, index) => {
     setTimeout(() => {
       gsap.to(`.${e.className}`, {
@@ -65,4 +65,6 @@ timeline
   .to(".s2sq2", { y: size.height * -1 }, "<")
   .to(".sq1, .sq3", { y: size.height }, "<.2")
   .to(".sq2", { y: size.height * -1 }, "<")
-  .add(() => setFunc(spanArray));
+  .add(() => setFunc(spanArray))
+  .to(".slide3", { backgroundColor: "#0dbbde" }, ">2")
+  .to(".s3sq1 span", { color: "#fff" }, "<");
