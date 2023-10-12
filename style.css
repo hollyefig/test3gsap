@@ -12,6 +12,7 @@ body {
   height: var(--height);
   font-family: "Quicksand", sans-serif;
   overflow: hidden;
+  position: relative;
 }
 
 /* .slide1,
@@ -25,7 +26,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   color: #000;
-  position: relative;
+  position: absolute;
 }
 
 .slide1 .sq1 {
@@ -58,7 +59,7 @@ body {
 }
 
 .slide2 {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
   width: var(--width);
