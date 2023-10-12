@@ -11,15 +11,6 @@ thirdSlideText.forEach((e, index) => {
   thirdSlide.appendChild(span);
 });
 
-const createSpans = () => {
-  thirdSlideText.forEach((e, index) => {
-    const span = document.createElement("span");
-    span.classList.add(`thirdSlideText${index}`);
-    e === " " ? (span.textContent = "\u00A0") : (span.textContent = e);
-    thirdSlide.appendChild(span);
-  });
-};
-
 let timeline = gsap.timeline({
   defaults: {
     delay: 0,
@@ -63,17 +54,3 @@ timeline
   )
   .to(".slide3", { backgroundColor: "#0dbbde" })
   .to(".s3sq1 span", { color: "#fff" }, "<");
-
-const submitText = () => {
-  let textInput = document.querySelector(".textInput").value;
-  while (thirdSlide.firstChild) {
-    thirdSlide.removeChild(thirdSlide.firstChild);
-  }
-  if (textInput !== "") {
-    thirdSlideText = textInput.split("");
-    createSpans();
-    timeline.restart();
-  } else {
-    alert("please input text");
-  }
-};
