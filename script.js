@@ -1,16 +1,24 @@
 const size = { width: 600, height: 250 },
   rotateIn = { fontSize: "1rem", rotation: 45, opacity: 0, stagger: 0.2 },
-  thirdSlide = document.querySelector(".s3sq1"),
-  thirdSlideText = "I always choose Charmander!".split("");
+  thirdSlide = document.querySelector(".s3sq1");
 
-for (let i = 0; i < thirdSlideText.length; i++) {
+let thirdSlideText = "I love my cats so much".split("");
+
+thirdSlideText.forEach((e, index) => {
   const span = document.createElement("span");
-  span.classList.add(`thirdSlideText${i}`);
-  thirdSlideText[i] === " "
-    ? (span.textContent = "\u00A0")
-    : (span.textContent = thirdSlideText[i]);
+  span.classList.add(`thirdSlideText${index}`);
+  e === " " ? (span.textContent = "\u00A0") : (span.textContent = e);
   thirdSlide.appendChild(span);
-}
+});
+
+const createSpans = () => {
+  thirdSlideText.forEach((e, index) => {
+    const span = document.createElement("span");
+    span.classList.add(`thirdSlideText${index}`);
+    e === " " ? (span.textContent = "\u00A0") : (span.textContent = e);
+    thirdSlide.appendChild(span);
+  });
+};
 
 let timeline = gsap.timeline({
   defaults: {
@@ -55,3 +63,17 @@ timeline
   )
   .to(".slide3", { backgroundColor: "#0dbbde" })
   .to(".s3sq1 span", { color: "#fff" }, "<");
+
+const submitText = () => {
+  let textInput = document.querySelector(".textInput").value;
+  while (thirdSlide.firstChild) {
+    thirdSlide.removeChild(thirdSlide.firstChild);
+  }
+  if (textInput !== "") {
+    thirdSlideText = textInput.split("");
+    createSpans();
+    timeline.restart();
+  } else {
+    alert("please input text");
+  }
+};
