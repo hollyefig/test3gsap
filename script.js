@@ -1,5 +1,5 @@
 const size = { width: 600, height: 250 },
-  rotateIn = { fontSize: "1rem", rotation: 45, opacity: 0 },
+  rotateIn = { fontSize: "1rem", rotation: 45, opacity: 0, stagger: 0.2 },
   thirdSlide = document.querySelector(".s3sq1"),
   thirdSlideText = "I always choose Charmander!".split("");
 
@@ -21,13 +21,10 @@ let timeline = gsap.timeline({
 });
 
 timeline
-  .from(".slide1 > div", { y: size.height * -1, stagger: 0.3, delay: 1 })
-  .from(".sq1 h2", rotateIn, "<.5")
-  .from(".sq1 .material-symbols-outlined", rotateIn, "<.2")
-  .from(".sq2 h2", rotateIn, "<")
-  .from(".sq2 .material-symbols-outlined", rotateIn, "<.2")
-  .from(".sq3 h2", rotateIn, "<")
-  .from(".sq3 .material-symbols-outlined", rotateIn, "<.2")
+  .from(".slide1 > div", { y: -size.height, stagger: 0.3, delay: 1 })
+  .from(".sq1 h2, .sq1 .material-symbols-outlined", rotateIn, "<.5")
+  .from(".sq2 h2, .sq2 .material-symbols-outlined", rotateIn, "<.2")
+  .from(".sq3 h2, .sq3 .material-symbols-outlined", rotateIn, "<.2")
   .to(".slide2", { duration: 0.8, delay: 2.5 }, "<")
   .from(".slide2 > div", { x: size.width, duration: 0.8, stagger: 0.2 }, "<.5")
   .to(".slide1 > div > div", { opacity: 0 })
@@ -38,9 +35,9 @@ timeline
     stagger: 0.2,
   })
   .to(".s2sq1, .s2sq3", { delay: 3, y: size.height })
-  .to(".s2sq2", { y: size.height * -1 }, "<")
+  .to(".s2sq2", { y: -size.height }, "<")
   .to(".sq1, .sq3", { y: size.height }, "<.2")
-  .to(".sq2", { y: size.height * -1 }, "<")
+  .to(".sq2", { y: -size.height }, "<")
   .to(".s3sq1 span", {
     opacity: 1,
     duration: 0.2,
