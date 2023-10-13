@@ -2,11 +2,10 @@ const size = { width: 600, height: 250 },
   rotateIn = { fontSize: "1rem", rotation: 45, opacity: 0, stagger: 0.2 },
   thirdSlide = document.querySelector(".s3sq1");
 
-let thirdSlideText = "I love my cats so much".split("");
+let thirdSlideText = "My name is Holly Fig".split("");
 
-thirdSlideText.forEach((e, index) => {
+thirdSlideText.forEach((e) => {
   const span = document.createElement("span");
-  span.classList.add(`thirdSlideText${index}`);
   e === " " ? (span.textContent = "\u00A0") : (span.textContent = e);
   thirdSlide.appendChild(span);
 });
